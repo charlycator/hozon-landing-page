@@ -1,2 +1,2 @@
 # hozon-landing-page
-Hozon.io landing page
+https://hozon.io landing page
