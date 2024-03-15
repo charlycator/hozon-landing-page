@@ -1,0 +1,264 @@
+@keyframes shake-input {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(5px, 5px) rotate(5deg);
+  }
+  50% {
+    transform: translate(0, 0) rotate(0eg);
+  }
+  75% {
+    transform: translate(-5px, 5px) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ }
+ 
+ @keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ }
+ 
+ @-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ }
+ 
+ @keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ }
+ 
+
+
+/*************/
+/* Sections */
+/*************/
+
+
+/* Intro */
+
+#intro {
+    padding-top: 20em;
+    margin-top: -13em;
+}
+
+
+/* Features */
+
+
+/* Chart */
+
+
+/* About us */
+
+#about-us {
+    border: 0;
+}
+
+#about-us #team-list {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:
+    center; margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#about-us #team-list li {
+    width:200px;
+    height: 200px;
+    margin: 8em 1em;
+}
+
+
+/* Footer */
+
+#waiting-list-form {
+    display: flex;
+    flex-flow: wrap; 
+    text-align: center;
+    width: 80%;
+    justify-content: center;
+    margin: auto;
+}
+
+#waiting-list-form input,
+#waiting-list-form button {
+    flex-wrap: wrap;
+    flex-direction: column;
+    display: flex;
+}
+
+#waiting-list-form button {
+    margin-top:1em;
+}
+
+#waiting-list-form input {
+  border: none;
+  padding: 0.8em;
+  width: 100%;
+  border-radius: 5px;
+  margin: 0;
+}
+
+#waiting-list-form input:focus {
+  outline: none;
+}
+
+#waiting-list-form input::placeholder {
+  color: #91b7c3;
+}
+
+#waiting-list-form .invalid-input {
+    animation: shake-input 0.4s ease-in-out 0s 2;
+    color: white;
+    background-color: red;
+  }
+
+#waiting-list-form .hozon-buttons {
+  width: 100px;
+}
+
+#contact #waiting-list-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    width: auto;
+    justify-content: center;
+}
+
+#contact #success-joining-message {
+    text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+    color: gold;
+    display: block;  
+    opacity: 0;
+    margin-bottom: 1em;
+}
+
+#footer-content {
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: wrap-reverse; 
+  align-items: baseline; 
+  justify-content: space-evenly;
+}
+
+
+/* Recaptcha */
+
+.g-recaptcha {
+    margin-top: 1em;
+}
+
+.g-recaptcha-not-filled {
+    animation: shake-input 0.4s ease-in-out 0s 2;
+    border: 3px solid red;
+    border-radius: 3px;
+}
+/******************/
+/* Common styles */
+/******************/
+
+.hozon-name {
+  color: #0a67e3;
+  font-weight: bolder;
+}
+
+.hozon-text {
+  font-weight: 400;
+  font-size: 20px;
+  color: #4f5e70;
+}
+
+.hozon-h1 {
+    font-weight: 500;
+    font-size: 80px;
+    color: #4f5e70;
+    background-attachment: #5EA7FF;
+    width: 100%;
+}
+
+.hozon-section {
+  padding-top: 6rem;
+}
+
+#hozon-info {
+  font-size: medium;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: #4f5e70;
+  font-weight: 400;
+}
+
+.hozon-button {
+    border: none;
+    border-radius: 0px !important;
+    cursor: pointer;
+    width: 100%;
+    padding: 0.8em;
+    background-color: #0a67e3;
+    color: #fff;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 700;
+    align-items: center;
+  }
+  
+  .hozon-button:hover {
+    background-color: hsl(215, 83%, 9%);
+    color: #fff;
+  }
+
+  .fade-in {
+    animation: fadeIn 1s;
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -o-animation: fadeIn 1s;
+    -ms-animation: fadeIn 1s;
+  }
+
+  .fade-out {
+    animation: fadeOut 1s;
+    -webkit-animation: fadeOut 1s;
+    -moz-animation: fadeOut 1s;
+    -o-animation: fadeOut 1s;
+    -ms-animation: fadeOut 1s;
+  }

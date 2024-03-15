@@ -1,0 +1,1447 @@
+<html class="vk" lang="en">
+
+<head>
+  <script
+    src="moz-extension://2cb4688a-562b-4c0a-b02f-8749710e3271/content/pageScripts/dashlane-tiresias-page-script.js"
+    id="dashlane_tiresias"></script>
+  <script
+    src="moz-extension://2cb4688a-562b-4c0a-b02f-8749710e3271/content/pageScripts/dashlane-webauthn-page-script.js"
+    id="dashlane_webauthn" name="forward_webauthn_ready"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    HOZON.xyz - Spare change to crypto
+  </title>
+  <link rel="icon" href="favicon.ico">
+  <link href="style.css" rel="stylesheet">
+  <style id="apexcharts-css">
+    @keyframes opaque {
+      0% {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes resizeanim {
+
+      0%,
+      to {
+        opacity: 0
+      }
+    }
+
+    .apexcharts-canvas {
+      position: relative;
+      user-select: none
+    }
+
+    .apexcharts-canvas ::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 6px
+    }
+
+    .apexcharts-canvas ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, .5);
+      box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+      -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5)
+    }
+
+    .apexcharts-inner {
+      position: relative
+    }
+
+    .apexcharts-text tspan {
+      font-family: inherit
+    }
+
+    .legend-mouseover-inactive {
+      transition: .15s ease all;
+      opacity: .2
+    }
+
+    .apexcharts-legend-text {
+      padding-left: 15px;
+      margin-left: -15px;
+    }
+
+    .apexcharts-series-collapsed {
+      opacity: 0
+    }
+
+    .apexcharts-tooltip {
+      border-radius: 5px;
+      box-shadow: 2px 2px 6px -4px #999;
+      cursor: default;
+      font-size: 14px;
+      left: 62px;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      white-space: nowrap;
+      z-index: 12;
+      transition: .15s ease all
+    }
+
+    .apexcharts-tooltip.apexcharts-active {
+      opacity: 1;
+      transition: .15s ease all
+    }
+
+    .apexcharts-tooltip.apexcharts-theme-light {
+      border: 1px solid #e3e3e3;
+      background: rgba(255, 255, 255, .96)
+    }
+
+    .apexcharts-tooltip.apexcharts-theme-dark {
+      color: #fff;
+      background: rgba(30, 30, 30, .8)
+    }
+
+    .apexcharts-tooltip * {
+      font-family: inherit
+    }
+
+    .apexcharts-tooltip-title {
+      padding: 6px;
+      font-size: 15px;
+      margin-bottom: 4px
+    }
+
+    .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+      background: #eceff1;
+      border-bottom: 1px solid #ddd
+    }
+
+    .apexcharts-tooltip.apexcharts-theme-dark .apexcharts-tooltip-title {
+      background: rgba(0, 0, 0, .7);
+      border-bottom: 1px solid #333
+    }
+
+    .apexcharts-tooltip-text-goals-value,
+    .apexcharts-tooltip-text-y-value,
+    .apexcharts-tooltip-text-z-value {
+      display: inline-block;
+      margin-left: 5px;
+      font-weight: 600
+    }
+
+    .apexcharts-tooltip-text-goals-label:empty,
+    .apexcharts-tooltip-text-goals-value:empty,
+    .apexcharts-tooltip-text-y-label:empty,
+    .apexcharts-tooltip-text-y-value:empty,
+    .apexcharts-tooltip-text-z-value:empty,
+    .apexcharts-tooltip-title:empty {
+      display: none
+    }
+
+    .apexcharts-tooltip-text-goals-label,
+    .apexcharts-tooltip-text-goals-value {
+      padding: 6px 0 5px
+    }
+
+    .apexcharts-tooltip-goals-group,
+    .apexcharts-tooltip-text-goals-label,
+    .apexcharts-tooltip-text-goals-value {
+      display: flex
+    }
+
+    .apexcharts-tooltip-text-goals-label:not(:empty),
+    .apexcharts-tooltip-text-goals-value:not(:empty) {
+      margin-top: -6px
+    }
+
+    .apexcharts-tooltip-marker {
+      width: 12px;
+      height: 12px;
+      position: relative;
+      top: 0;
+      margin-right: 10px;
+      border-radius: 50%
+    }
+
+    .apexcharts-tooltip-series-group {
+      padding: 0 10px;
+      display: none;
+      text-align: left;
+      justify-content: left;
+      align-items: center
+    }
+
+    .apexcharts-tooltip-series-group.apexcharts-active .apexcharts-tooltip-marker {
+      opacity: 1
+    }
+
+    .apexcharts-tooltip-series-group.apexcharts-active,
+    .apexcharts-tooltip-series-group:last-child {
+      padding-bottom: 4px
+    }
+
+    .apexcharts-tooltip-series-group-hidden {
+      opacity: 0;
+      height: 0;
+      line-height: 0;
+      padding: 0 !important
+    }
+
+    .apexcharts-tooltip-y-group {
+      padding: 6px 0 5px
+    }
+
+    .apexcharts-custom-tooltip,
+    .apexcharts-tooltip-box {
+      padding: 4px 8px
+    }
+
+    .apexcharts-tooltip-boxPlot {
+      display: flex;
+      flex-direction: column-reverse
+    }
+
+    .apexcharts-tooltip-box>div {
+      margin: 4px 0
+    }
+
+    .apexcharts-tooltip-box span.value {
+      font-weight: 700
+    }
+
+    .apexcharts-tooltip-rangebar {
+      padding: 5px 8px
+    }
+
+    .apexcharts-tooltip-rangebar .category {
+      font-weight: 600;
+      color: #777
+    }
+
+    .apexcharts-tooltip-rangebar .series-name {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 5px
+    }
+
+    .apexcharts-xaxistooltip,
+    .apexcharts-yaxistooltip {
+      opacity: 0;
+      pointer-events: none;
+      color: #373d3f;
+      font-size: 13px;
+      text-align: center;
+      border-radius: 2px;
+      position: absolute;
+      z-index: 10;
+      background: #eceff1;
+      border: 1px solid #90a4ae
+    }
+
+    .apexcharts-xaxistooltip {
+      padding: 9px 10px;
+      transition: .15s ease all
+    }
+
+    .apexcharts-xaxistooltip.apexcharts-theme-dark {
+      background: rgba(0, 0, 0, .7);
+      border: 1px solid rgba(0, 0, 0, .5);
+      color: #fff
+    }
+
+    .apexcharts-xaxistooltip:after,
+    .apexcharts-xaxistooltip:before {
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none
+    }
+
+    .apexcharts-xaxistooltip:after {
+      border-color: transparent;
+      border-width: 6px;
+      margin-left: -6px
+    }
+
+    .apexcharts-xaxistooltip:before {
+      border-color: transparent;
+      border-width: 7px;
+      margin-left: -7px
+    }
+
+    .apexcharts-xaxistooltip-bottom:after,
+    .apexcharts-xaxistooltip-bottom:before {
+      bottom: 100%
+    }
+
+    .apexcharts-xaxistooltip-top:after,
+    .apexcharts-xaxistooltip-top:before {
+      top: 100%
+    }
+
+    .apexcharts-xaxistooltip-bottom:after {
+      border-bottom-color: #eceff1
+    }
+
+    .apexcharts-xaxistooltip-bottom:before {
+      border-bottom-color: #90a4ae
+    }
+
+    .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:after,
+    .apexcharts-xaxistooltip-bottom.apexcharts-theme-dark:before {
+      border-bottom-color: rgba(0, 0, 0, .5)
+    }
+
+    .apexcharts-xaxistooltip-top:after {
+      border-top-color: #eceff1
+    }
+
+    .apexcharts-xaxistooltip-top:before {
+      border-top-color: #90a4ae
+    }
+
+    .apexcharts-xaxistooltip-top.apexcharts-theme-dark:after,
+    .apexcharts-xaxistooltip-top.apexcharts-theme-dark:before {
+      border-top-color: rgba(0, 0, 0, .5)
+    }
+
+    .apexcharts-xaxistooltip.apexcharts-active {
+      opacity: 1;
+      transition: .15s ease all
+    }
+
+    .apexcharts-yaxistooltip {
+      padding: 4px 10px
+    }
+
+    .apexcharts-yaxistooltip.apexcharts-theme-dark {
+      background: rgba(0, 0, 0, .7);
+      border: 1px solid rgba(0, 0, 0, .5);
+      color: #fff
+    }
+
+    .apexcharts-yaxistooltip:after,
+    .apexcharts-yaxistooltip:before {
+      top: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none
+    }
+
+    .apexcharts-yaxistooltip:after {
+      border-color: transparent;
+      border-width: 6px;
+      margin-top: -6px
+    }
+
+    .apexcharts-yaxistooltip:before {
+      border-color: transparent;
+      border-width: 7px;
+      margin-top: -7px
+    }
+
+    .apexcharts-yaxistooltip-left:after,
+    .apexcharts-yaxistooltip-left:before {
+      left: 100%
+    }
+
+    .apexcharts-yaxistooltip-right:after,
+    .apexcharts-yaxistooltip-right:before {
+      right: 100%
+    }
+
+    .apexcharts-yaxistooltip-left:after {
+      border-left-color: #eceff1
+    }
+
+    .apexcharts-yaxistooltip-left:before {
+      border-left-color: #90a4ae
+    }
+
+    .apexcharts-yaxistooltip-left.apexcharts-theme-dark:after,
+    .apexcharts-yaxistooltip-left.apexcharts-theme-dark:before {
+      border-left-color: rgba(0, 0, 0, .5)
+    }
+
+    .apexcharts-yaxistooltip-right:after {
+      border-right-color: #eceff1
+    }
+
+    .apexcharts-yaxistooltip-right:before {
+      border-right-color: #90a4ae
+    }
+
+    .apexcharts-yaxistooltip-right.apexcharts-theme-dark:after,
+    .apexcharts-yaxistooltip-right.apexcharts-theme-dark:before {
+      border-right-color: rgba(0, 0, 0, .5)
+    }
+
+    .apexcharts-yaxistooltip.apexcharts-active {
+      opacity: 1
+    }
+
+    .apexcharts-yaxistooltip-hidden {
+      display: none
+    }
+
+    .apexcharts-xcrosshairs,
+    .apexcharts-ycrosshairs {
+      pointer-events: none;
+      opacity: 0;
+      transition: .15s ease all
+    }
+
+    .apexcharts-xcrosshairs.apexcharts-active,
+    .apexcharts-ycrosshairs.apexcharts-active {
+      opacity: 1;
+      transition: .15s ease all
+    }
+
+    .apexcharts-ycrosshairs-hidden {
+      opacity: 0
+    }
+
+    .apexcharts-selection-rect {
+      cursor: move
+    }
+
+    .svg_select_boundingRect,
+    .svg_select_points_rot {
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden
+    }
+
+    .apexcharts-selection-rect+g .svg_select_boundingRect,
+    .apexcharts-selection-rect+g .svg_select_points_rot {
+      opacity: 0;
+      visibility: hidden
+    }
+
+    .apexcharts-selection-rect+g .svg_select_points_l,
+    .apexcharts-selection-rect+g .svg_select_points_r {
+      cursor: ew-resize;
+      opacity: 1;
+      visibility: visible
+    }
+
+    .svg_select_points {
+      fill: #efefef;
+      stroke: #333;
+      rx: 2
+    }
+
+    .apexcharts-svg.apexcharts-zoomable.hovering-zoom {
+      cursor: crosshair
+    }
+
+    .apexcharts-svg.apexcharts-zoomable.hovering-pan {
+      cursor: move
+    }
+
+    .apexcharts-menu-icon,
+    .apexcharts-pan-icon,
+    .apexcharts-reset-icon,
+    .apexcharts-selection-icon,
+    .apexcharts-toolbar-custom-icon,
+    .apexcharts-zoom-icon,
+    .apexcharts-zoomin-icon,
+    .apexcharts-zoomout-icon {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      line-height: 24px;
+      color: #6e8192;
+      text-align: center
+    }
+
+    .apexcharts-menu-icon svg,
+    .apexcharts-reset-icon svg,
+    .apexcharts-zoom-icon svg,
+    .apexcharts-zoomin-icon svg,
+    .apexcharts-zoomout-icon svg {
+      fill: #6e8192
+    }
+
+    .apexcharts-selection-icon svg {
+      fill: #444;
+      transform: scale(.76)
+    }
+
+    .apexcharts-theme-dark .apexcharts-menu-icon svg,
+    .apexcharts-theme-dark .apexcharts-pan-icon svg,
+    .apexcharts-theme-dark .apexcharts-reset-icon svg,
+    .apexcharts-theme-dark .apexcharts-selection-icon svg,
+    .apexcharts-theme-dark .apexcharts-toolbar-custom-icon svg,
+    .apexcharts-theme-dark .apexcharts-zoom-icon svg,
+    .apexcharts-theme-dark .apexcharts-zoomin-icon svg,
+    .apexcharts-theme-dark .apexcharts-zoomout-icon svg {
+      fill: #f3f4f5
+    }
+
+    .apexcharts-canvas .apexcharts-reset-zoom-icon.apexcharts-selected svg,
+    .apexcharts-canvas .apexcharts-selection-icon.apexcharts-selected svg,
+    .apexcharts-canvas .apexcharts-zoom-icon.apexcharts-selected svg {
+      fill: #008ffb
+    }
+
+    .apexcharts-theme-light .apexcharts-menu-icon:hover svg,
+    .apexcharts-theme-light .apexcharts-reset-icon:hover svg,
+    .apexcharts-theme-light .apexcharts-selection-icon:not(.apexcharts-selected):hover svg,
+    .apexcharts-theme-light .apexcharts-zoom-icon:not(.apexcharts-selected):hover svg,
+    .apexcharts-theme-light .apexcharts-zoomin-icon:hover svg,
+    .apexcharts-theme-light .apexcharts-zoomout-icon:hover svg {
+      fill: #333
+    }
+
+    .apexcharts-menu-icon,
+    .apexcharts-selection-icon {
+      position: relative
+    }
+
+    .apexcharts-reset-icon {
+      margin-left: 5px
+    }
+
+    .apexcharts-menu-icon,
+    .apexcharts-reset-icon,
+    .apexcharts-zoom-icon {
+      transform: scale(.85)
+    }
+
+    .apexcharts-zoomin-icon,
+    .apexcharts-zoomout-icon {
+      transform: scale(.7)
+    }
+
+    .apexcharts-zoomout-icon {
+      margin-right: 3px
+    }
+
+    .apexcharts-pan-icon {
+      transform: scale(.62);
+      position: relative;
+      left: 1px;
+      top: 0
+    }
+
+    .apexcharts-pan-icon svg {
+      fill: #fff;
+      stroke: #6e8192;
+      stroke-width: 2
+    }
+
+    .apexcharts-pan-icon.apexcharts-selected svg {
+      stroke: #008ffb
+    }
+
+    .apexcharts-pan-icon:not(.apexcharts-selected):hover svg {
+      stroke: #333
+    }
+
+    .apexcharts-toolbar {
+      position: absolute;
+      z-index: 11;
+      max-width: 176px;
+      text-align: right;
+      border-radius: 3px;
+      padding: 0 6px 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .apexcharts-menu {
+      background: #fff;
+      position: absolute;
+      top: 100%;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 3px;
+      right: 10px;
+      opacity: 0;
+      min-width: 110px;
+      transition: .15s ease all;
+      pointer-events: none
+    }
+
+    .apexcharts-menu.apexcharts-menu-open {
+      opacity: 1;
+      pointer-events: all;
+      transition: .15s ease all
+    }
+
+    .apexcharts-menu-item {
+      padding: 6px 7px;
+      font-size: 12px;
+      cursor: pointer
+    }
+
+    .apexcharts-theme-light .apexcharts-menu-item:hover {
+      background: #eee
+    }
+
+    .apexcharts-theme-dark .apexcharts-menu {
+      background: rgba(0, 0, 0, .7);
+      color: #fff
+    }
+
+    @media screen and (min-width:768px) {
+      .apexcharts-canvas:hover .apexcharts-toolbar {
+        opacity: 1
+      }
+    }
+
+    .apexcharts-canvas .apexcharts-element-hidden,
+    .apexcharts-datalabel.apexcharts-element-hidden,
+    .apexcharts-hide .apexcharts-series-points {
+      opacity: 0
+    }
+
+    .apexcharts-datalabel,
+    .apexcharts-datalabel-label,
+    .apexcharts-datalabel-value,
+    .apexcharts-datalabels,
+    .apexcharts-pie-label {
+      cursor: default;
+      pointer-events: none
+    }
+
+    .apexcharts-pie-label-delay {
+      opacity: 0;
+      animation-name: opaque;
+      animation-duration: .3s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease
+    }
+
+    .apexcharts-annotation-rect,
+    .apexcharts-area-series .apexcharts-area,
+    .apexcharts-area-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+    .apexcharts-gridline,
+    .apexcharts-line,
+    .apexcharts-line-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events,
+    .apexcharts-point-annotation-label,
+    .apexcharts-radar-series path,
+    .apexcharts-radar-series polygon,
+    .apexcharts-toolbar svg,
+    .apexcharts-tooltip .apexcharts-marker,
+    .apexcharts-xaxis-annotation-label,
+    .apexcharts-yaxis-annotation-label,
+    .apexcharts-zoom-rect {
+      pointer-events: none
+    }
+
+    .apexcharts-marker {
+      transition: .15s ease all
+    }
+
+    .resize-triggers {
+      animation: 1ms resizeanim;
+      visibility: hidden;
+      opacity: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden
+    }
+
+    .contract-trigger:before,
+    .resize-triggers,
+    .resize-triggers>div {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0
+    }
+
+    .resize-triggers>div {
+      height: 100%;
+      width: 100%;
+      background: #eee;
+      overflow: auto
+    }
+
+    .contract-trigger:before {
+      overflow: hidden;
+      width: 200%;
+      height: 200%
+    }
+  </style>
+</head>
+
+<body class="kf fl">
+
+  <header class="kf gl zf rl ij oj " class="f ba qb jc be c lf hl" style="height: 110px;">
+    <div class="a">
+      <div class="e ha qb be ee">
+        <div class="kc zc ng">
+          <img src="hozon-logo.png" alt="logo" class="sb jc wk" style="margin: 0; width: 90px;">
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <section id="home" class="e ca wh" style="padding-top: 20em; margin-top: -13em">
+    <div class="a" style="display: flex; align-items: center;flex-wrap: wrap;">
+        <div class="ng" style="width:50%; flex-basis: 600px; flex-grow: 1;">
+          <div class="la fd fi">
+            <h1 class="pa li pi ui yi vl bo" style="font-weight: bold;font-size: 80px;">
+              Level Up Your Crypto Savings with <span style="color: gold">HOZON</span>
+            </h1>
+            <p class="la pa gd gi qi xi vl">
+              Maximize the impact of every purchase with <span style="color: gold">HOZON</span>. Round up your spare change to effortlessly save and invest in cryptocurrency.
+            </p>
+            <!-- div class="ma ra qb _d be de jm">
+              <div class="sk e db eh xm">
+                <span class="eb qb ac pc be de oe kf">
+                  <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M27.5815 17.3879C25.7115 24.8885 18.1146 29.4533 10.6131 27.5829C3.11474 25.7129 -1.44998 18.1155 0.420775 10.6155C2.28989 3.11409 9.8868 -1.45098 17.386 0.418958C24.8869 2.28889 29.4514 9.8871 27.5813 17.3881L27.5814 17.3879H27.5815Z"
+                      fill="#F7931A"></path>
+                    <path
+                      d="M18.9713 12.0301C19.2001 10.454 18.0353 9.60675 16.4424 9.04155L16.9591 6.90652L15.6975 6.58268L15.1945 8.6615C14.8628 8.57628 14.5222 8.49599 14.1837 8.41639L14.6904 6.32384L13.4295 6L12.9125 8.13434C12.6381 8.06996 12.3685 8.00634 12.107 7.9393L12.1084 7.93259L10.3686 7.48503L10.033 8.87315C10.033 8.87315 10.969 9.09418 10.9493 9.10778C11.4602 9.23914 11.5526 9.58753 11.5372 9.86367L10.9486 12.296C10.9838 12.3052 11.0294 12.3185 11.0798 12.3393C11.0377 12.3286 10.9929 12.3168 10.9464 12.3054L10.1214 15.7127C10.059 15.8726 9.90051 16.1125 9.54333 16.0214C9.55597 16.0403 8.62637 15.7857 8.62637 15.7857L8 17.2734L9.64178 17.695C9.94721 17.7739 10.2465 17.8564 10.5413 17.9341L10.0192 20.0936L11.2794 20.4174L11.7964 18.2808C12.1406 18.3771 12.4747 18.4659 12.8018 18.5496L12.2865 20.6762L13.5482 21L14.0702 18.8445C16.2215 19.264 17.8391 19.0949 18.52 17.0903C19.0687 15.4764 18.4927 14.5455 17.3609 13.9385C18.1852 13.7426 18.8062 13.1841 18.9717 12.0303L18.9713 12.03L18.9713 12.0301ZM16.0888 16.194C15.6989 17.8079 13.0611 16.9355 12.2059 16.7167L12.8987 13.8557C13.7539 14.0757 16.4963 14.5109 16.0888 16.194H16.0888ZM16.4789 12.0068C16.1233 13.4748 13.9278 12.7289 13.2157 12.5461L13.8438 9.95132C14.556 10.1342 16.8494 10.4755 16.4791 12.0068H16.4789Z"
+                      fill="white"></path>
+                  </svg>
+                </span>
+                <div class="d s t/2 ba rd/2 le oe rf _g tg zi fj uk">
+                  <span class="d u t/2 bc qc rd/2 sd rf"></span>
+                  <span>Bitcoin (BTC)</span>
+                </div>
+              </div>
+              <div class="sk e db eh xm">
+                <span class="eb qb ac pc be de oe kf">
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M27.578 17.3867C25.7082 24.8867 18.1118 29.4511 10.6109 27.5809C3.11305 25.7111 -1.45134 18.1142 0.419279 10.6148C2.28826 3.11387 9.88462 -1.45087 17.3833 0.418928C24.8837 2.28873 29.4478 9.88639 27.5778 17.3868L27.5779 17.3867H27.578Z"
+                      fill="#1181E7"></path>
+                    <g clip-path="url(#clip0_73_10312)">
+                      <path d="M13.9982 6.12451L13.8926 6.48343V16.8976L13.9982 17.003L18.8323 14.1456L13.9982 6.12451Z"
+                        fill="#D6D6D6"></path>
+                      <path d="M13.9982 6.12451L9.16406 14.1456L13.9982 17.003V11.9483V6.12451Z" fill="white"></path>
+                      <path d="M13.998 17.9175L13.9385 17.9901V21.6998L13.998 21.8736L18.835 15.0615L13.998 17.9175Z"
+                        fill="#D6D6D6"></path>
+                      <path d="M13.9982 21.8736V17.9175L9.16406 15.0615L13.9982 21.8736Z" fill="white"></path>
+                      <path d="M13.998 17.0025L18.8321 14.1451L13.998 11.9478V17.0025Z" fill="#F3F3F3"></path>
+                      <path d="M9.16406 14.1451L13.9982 17.0025V11.9478L9.16406 14.1451Z" fill="#E2E2E2"></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_73_10312">
+                        <rect width="15.749" height="15.749" fill="white" transform="translate(6.125 6.12451)"></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="d s t/2 ba rd/2 le oe rf _g tg zi fj uk">
+                  <span class="d u t/2 bc qc rd/2 sd rf"></span>
+                  <span>Ethereum (ETH)</span>
+                </div>
+              </div>
+              <div class="sk e db eh xm">
+                <span class="eb qb ac pc be de oe kf">
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="14" cy="13.9995" r="14" fill="#8247E5"></circle>
+                    <g clip-path="url(#clip0_73_10294)">
+                      <path
+                        d="M17.5729 10.8364C17.3177 10.686 16.9896 10.686 16.6979 10.8364L14.6562 12.0776L13.2708 12.8675L11.2656 14.1087C11.0104 14.2591 10.6823 14.2591 10.3906 14.1087L8.82292 13.1308C8.56771 12.9803 8.38542 12.6794 8.38542 12.3409V10.4603C8.38542 10.1594 8.53125 9.85852 8.82292 9.67046L10.3906 8.73016C10.6458 8.57972 10.974 8.57972 11.2656 8.73016L12.8333 9.70807C13.0885 9.85852 13.2708 10.1594 13.2708 10.4979V11.7391L14.6562 10.9117V9.63285C14.6562 9.33195 14.5104 9.03106 14.2187 8.843L11.3021 7.07524C11.0469 6.92479 10.7187 6.92479 10.4271 7.07524L7.4375 8.88061C7.14583 9.03106 7 9.33195 7 9.63285V13.1684C7 13.4693 7.14583 13.7702 7.4375 13.9582L10.3906 15.726C10.6458 15.8764 10.974 15.8764 11.2656 15.726L13.2708 14.5224L14.6562 13.6949L16.6615 12.4914C16.9167 12.3409 17.2448 12.3409 17.5365 12.4914L19.1042 13.4317C19.3594 13.5821 19.5417 13.883 19.5417 14.2215V16.1021C19.5417 16.403 19.3958 16.7039 19.1042 16.892L17.5729 17.8323C17.3177 17.9827 16.9896 17.9827 16.6979 17.8323L15.1302 16.892C14.875 16.7415 14.6927 16.4406 14.6927 16.1021V14.8985L13.3073 15.726V16.9672C13.3073 17.2681 13.4531 17.569 13.7448 17.757L16.6979 19.5248C16.9531 19.6752 17.2812 19.6752 17.5729 19.5248L20.526 17.757C20.7812 17.6066 20.9635 17.3057 20.9635 16.9672V13.394C20.9635 13.0931 20.8177 12.7923 20.526 12.6042L17.5729 10.8364Z"
+                        fill="white"></path>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_73_10294">
+                        <rect width="14" height="12.6" fill="white" transform="translate(7 7)"></rect>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="d s t/2 ba rd/2 le oe rf _g tg zi fj uk">
+                  <span class="d u t/2 bc qc rd/2 sd rf"></span>
+                  <span>MATIC (MAT)</span>
+                </div>
+              </div>
+              <div class="sk e db eh xm">
+                <span class="eb qb ac pc be de oe kf">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" data-name="86977684-12db-4850-8f30-233a7c267d11" viewBox="0 0 2000 2000">
+                  <path d="M1000 2000c554.17 0 1000-445.83 1000-1000S1554.17 0 1000 0 0 445.83 0 1000s445.83 1000 1000 1000z" fill="#2775ca"/>
+                  <path d="M1275 1158.33c0-145.83-87.5-195.83-262.5-216.66-125-16.67-150-50-150-108.34s41.67-95.83 125-95.83c75 0 116.67 25 137.5 87.5 4.17 12.5 16.67 20.83 29.17 20.83h66.66c16.67 0 29.17-12.5 29.17-29.16v-4.17c-16.67-91.67-91.67-162.5-187.5-170.83v-100c0-16.67-12.5-29.17-33.33-33.34h-62.5c-16.67 0-29.17 12.5-33.34 33.34v95.83c-125 16.67-204.16 100-204.16 204.17 0 137.5 83.33 191.66 258.33 212.5 116.67 20.83 154.17 45.83 154.17 112.5s-58.34 112.5-137.5 112.5c-108.34 0-145.84-45.84-158.34-108.34-4.16-16.66-16.66-25-29.16-25h-70.84c-16.66 0-29.16 12.5-29.16 29.17v4.17c16.66 104.16 83.33 179.16 220.83 200v100c0 16.66 12.5 29.16 33.33 33.33h62.5c16.67 0 29.17-12.5 33.34-33.33v-100c125-20.84 208.33-108.34 208.33-220.84z" fill="#fff"/>
+                  <path d="M787.5 1595.83c-325-116.66-491.67-479.16-370.83-800 62.5-175 200-308.33 370.83-370.83 16.67-8.33 25-20.83 25-41.67V325c0-16.67-8.33-29.17-25-33.33-4.17 0-12.5 0-16.67 4.16-395.83 125-612.5 545.84-487.5 941.67 75 233.33 254.17 412.5 487.5 487.5 16.67 8.33 33.34 0 37.5-16.67 4.17-4.16 4.17-8.33 4.17-16.66v-58.34c0-12.5-12.5-29.16-25-37.5zM1229.17 295.83c-16.67-8.33-33.34 0-37.5 16.67-4.17 4.17-4.17 8.33-4.17 16.67v58.33c0 16.67 12.5 33.33 25 41.67 325 116.66 491.67 479.16 370.83 800-62.5 175-200 308.33-370.83 370.83-16.67 8.33-25 20.83-25 41.67V1700c0 16.67 8.33 29.17 25 33.33 4.17 0 12.5 0 16.67-4.16 395.83-125 612.5-545.84 487.5-941.67-75-237.5-258.34-416.67-487.5-491.67z" fill="#fff"/>
+                </svg>
+                </span>
+                <div class="d s t/2 ba rd/2 le oe rf _g tg zi fj uk">
+                  <span class="d u t/2 bc qc rd/2 sd rf"></span>
+                  <span>USD Coin (USDC)</span>
+                </div>
+              </span>
+              </div>
+              <div class="sk e db eh xm">
+                <span class="eb qb ac pc be de oe kf">
+                  <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 397.7 311.7" style="enable-background:new 0 0 397.7 311.7;" xml:space="preserve">
+                    <style type="text/css">
+                      .st0{fill:url(#SVGID_1_);}
+                      .st1{fill:url(#SVGID_2_);}
+                      .st2{fill:url(#SVGID_3_);}
+                    </style>
+                    <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="360.8791" y1="351.4553" x2="141.213" y2="-69.2936" gradientTransform="matrix(1 0 0 -1 0 314)">
+                      <stop offset="0" style="stop-color:#00FFA3"/>
+                      <stop offset="1" style="stop-color:#DC1FFF"/>
+                    </linearGradient>
+                    <path class="st0" d="M64.6,237.9c2.4-2.4,5.7-3.8,9.2-3.8h317.4c5.8,0,8.7,7,4.6,11.1l-62.7,62.7c-2.4,2.4-5.7,3.8-9.2,3.8H6.5  c-5.8,0-8.7-7-4.6-11.1L64.6,237.9z"/>
+                    <linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="264.8291" y1="401.6014" x2="45.163" y2="-19.1475" gradientTransform="matrix(1 0 0 -1 0 314)">
+                      <stop offset="0" style="stop-color:#00FFA3"/>
+                      <stop offset="1" style="stop-color:#DC1FFF"/>
+                    </linearGradient>
+                    <path class="st1" d="M64.6,3.8C67.1,1.4,70.4,0,73.8,0h317.4c5.8,0,8.7,7,4.6,11.1l-62.7,62.7c-2.4,2.4-5.7,3.8-9.2,3.8H6.5  c-5.8,0-8.7-7-4.6-11.1L64.6,3.8z"/>
+                    <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="312.5484" y1="376.688" x2="92.8822" y2="-44.061" gradientTransform="matrix(1 0 0 -1 0 314)">
+                      <stop offset="0" style="stop-color:#00FFA3"/>
+                      <stop offset="1" style="stop-color:#DC1FFF"/>
+                    </linearGradient>
+                    <path class="st2" d="M333.1,120.1c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8,0-8.7,7-4.6,11.1l62.7,62.7c2.4,2.4,5.7,3.8,9.2,3.8h317.4  c5.8,0,8.7-7,4.6-11.1L333.1,120.1z"/>
+                    </svg>
+                </span>
+                <div class="d s t/2 ba rd/2 le oe rf _g tg zi fj uk">
+                  <span class="d u t/2 bc qc rd/2 sd rf"></span>
+                  <span>Solana coin (SOL)</span>
+                </div>
+              </span>
+              </div>
+            </div -->
+          </div>
+        </div>
+        <div style="width:50%; flex-basis: 600px; flex-grow: 1;">
+          <div class="kc zc ng" style="width:100%">
+            <img src="pay-picture.png" alt="logo" class="sb jc wk">
+          </div>
+        </div>
+    </div>
+    <div class="d f l ea yb jc gj" style="
+          background-image: linear-gradient(
+            180deg,
+            #3e7dff 0%,
+            rgba(62, 125, 255, 0) 100%
+          );
+        "></div>
+    <img src="hero-shape-1.svg" alt="" class="d l ea" style="top:95px">
+    <img src="hero-shape-2.svg" alt="" class="d m f ea">
+  </section>
+
+
+
+  <section id="features" class="th zh">
+    <div class="a">
+      <div class="wow fadeInUp la fb id fi qn" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+        <span class="va gi pi ri bj fn">
+          Invest in Crypto Automatically
+        </span>
+        <p class="gi qi xi ul">
+          Take the difficulty out of investing with roundups, multipliers, and recurring investments that make crypto savings easy.
+        </p>
+      </div>
+      <div class="ha qb _d">
+        <div class="jc ng vn/2 yo/3">
+          <div class="wow fadeInUp la bb jd fi" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+            <div class="la gb qb cc mc be de oe of zi">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20 1.66675L5 8.33341V18.3334C5 27.5834 11.4 36.2334 20 38.3334C28.6 36.2334 35 27.5834 35 18.3334V8.33341L20 1.66675ZM20 19.9834H31.6667C30.7833 26.8501 26.2 32.9667 20 34.8834V20.0001H8.33333V10.5001L20 5.31675V19.9834Z"
+                  fill="white"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="va ji pi yi vl gn rp rq">
+                Safe &amp; Secure
+              </h3>
+              <p class="ii qi xi ul dn qp pq">
+                Protect your investments with bank grade 256-bit encryption
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="jc ng vn/2 yo/3">
+          <div class="wow fadeInUp la bb jd fi" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+            <div class="la gb qb cc mc be de oe of zi">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M33.3333 9.99992H29.6999C29.8833 9.48325 29.9999 8.91658 29.9999 8.33325C29.9999 5.56659 27.7666 3.33325 24.9999 3.33325C23.2499 3.33325 21.7333 4.23325 20.8333 5.58325L19.9999 6.69992L19.1666 5.56659C18.2666 4.23325 16.7499 3.33325 14.9999 3.33325C12.2333 3.33325 9.99992 5.56659 9.99992 8.33325C9.99992 8.91658 10.1166 9.48325 10.2999 9.99992H6.66659C4.81659 9.99992 3.34992 11.4833 3.34992 13.3333L3.33325 31.6666C3.33325 33.5166 4.81659 34.9999 6.66659 34.9999H33.3333C35.1833 34.9999 36.6666 33.5166 36.6666 31.6666V13.3333C36.6666 11.4833 35.1833 9.99992 33.3333 9.99992ZM24.9999 6.66659C25.9166 6.66659 26.6666 7.41658 26.6666 8.33325C26.6666 9.24992 25.9166 9.99992 24.9999 9.99992C24.0833 9.99992 23.3333 9.24992 23.3333 8.33325C23.3333 7.41658 24.0833 6.66659 24.9999 6.66659ZM14.9999 6.66659C15.9166 6.66659 16.6666 7.41658 16.6666 8.33325C16.6666 9.24992 15.9166 9.99992 14.9999 9.99992C14.0833 9.99992 13.3333 9.24992 13.3333 8.33325C13.3333 7.41658 14.0833 6.66659 14.9999 6.66659ZM33.3333 31.6666H6.66659V28.3333H33.3333V31.6666ZM33.3333 23.3333H6.66659V13.3333H15.1333L11.6666 18.0499L14.3666 19.9999L18.3333 14.5999L19.9999 12.3333L21.6666 14.5999L25.6333 19.9999L28.3333 18.0499L24.8666 13.3333H33.3333V23.3333Z"
+                  fill="white"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="va ji pi yi vl gn rp rq">
+                Consistent Savings
+              </h3>
+              <p class="ii qi xi ul dn qp pq">
+                Save more over time with automated roundups and set recurring investments
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="jc ng vn/2 yo/3">
+          <div class="wow fadeInUp la bb jd fi" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+            <div class="la gb qb cc mc be de oe of zi">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 3.33325L10.8334 18.3333H29.1667L20 3.33325Z" fill="white"></path>
+                <path
+                  d="M29.1666 36.6667C33.3088 36.6667 36.6666 33.3089 36.6666 29.1667C36.6666 25.0246 33.3088 21.6667 29.1666 21.6667C25.0245 21.6667 21.6666 25.0246 21.6666 29.1667C21.6666 33.3089 25.0245 36.6667 29.1666 36.6667Z"
+                  fill="white"></path>
+                <path d="M5 22.5H18.3333V35.8333H5V22.5Z" fill="white"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="va ji pi yi vl gn rp rq">
+                Seamless Experience
+              </h3>
+              <p class="ii qi xi ul dn qp pq">
+                We are humans building for humans. <span style="color: gold">HOZON</span> is extremely easy to use
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="jc ng vn/2 yo/3">
+          <div class="wow fadeInUp la bb jd fi" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+            <div class="la gb qb cc mc be de oe of zi">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5 24.9999H18.3333V21.6666H5V24.9999ZM5 31.6666H18.3333V28.3333H5V31.6666ZM5 18.3333H18.3333V14.9999H5V18.3333ZM5 8.33325V11.6666H18.3333V8.33325H5ZM21.6667 8.33325H35V31.6666H21.6667V8.33325Z"
+                  fill="white"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="va ji pi yi vl gn rp rq">
+                Customizable Options
+              </h3>
+              <p class="ii qi xi ul dn qp pq">
+                Tailor <span style="color: gold">HOZON</span> to your needs with adjustable multipliers and recurring investments
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="jc ng vn/2 yo/3">
+          <div class="wow fadeInUp la bb jd fi" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+            <div class="la gb qb cc mc be de oe of zi">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M35 30V31.6667C35 33.5 33.5 35 31.6667 35H8.33333C6.48333 35 5 33.5 5 31.6667V8.33333C5 6.5 6.48333 5 8.33333 5H31.6667C33.5 5 35 6.5 35 8.33333V10H20C18.15 10 16.6667 11.5 16.6667 13.3333V26.6667C16.6667 28.5 18.15 30 20 30H35ZM20 26.6667H36.6667V13.3333H20V26.6667ZM26.6667 22.5C25.2833 22.5 24.1667 21.3833 24.1667 20C24.1667 18.6167 25.2833 17.5 26.6667 17.5C28.05 17.5 29.1667 18.6167 29.1667 20C29.1667 21.3833 28.05 22.5 26.6667 22.5Z"
+                  fill="white"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="va ji pi yi vl gn rp rq">
+                Your Own Wallet
+              </h3>
+              <p class="ii qi xi ul dn qp pq">
+                Hassle free experience. You can create with us or link yours 
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="jc ng vn/2 yo/3">
+          <div class="wow fadeInUp la bb jd fi" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+            <div class="la gb qb cc mc be de oe of zi">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20 13.3333C16.3167 13.3333 13.3333 16.3167 13.3333 20C13.3333 23.6833 16.3167 26.6667 20 26.6667C23.6833 26.6667 26.6667 23.6833 26.6667 20C26.6667 16.3167 23.6833 13.3333 20 13.3333ZM8.33333 25H5V31.6667C5 33.5 6.5 35 8.33333 35H15V31.6667H8.33333V25ZM8.33333 8.33333H15V5H8.33333C6.5 5 5 6.5 5 8.33333V15H8.33333V8.33333ZM31.6667 5H25V8.33333H31.6667V15H35V8.33333C35 6.5 33.5 5 31.6667 5ZM31.6667 31.6667H25V35H31.6667C33.5 35 35 33.5 35 31.6667V25H31.6667V31.6667Z"
+                  fill="white"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="va ji pi yi vl gn rp rq">
+                <span style="color: gold">HOZON</span> Academy
+              </h3>
+              <p class="ii qi xi ul dn qp pq">
+                Learn all about Web3, blockchain and cryptocurrency
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="e ca">
+    <div class="a">
+      <div class="me nf fh wg ml ym zm lp nq">
+        <div class="ha qb _d be">
+          <div class="jc ng yo/2">
+            <div class="wow fadeInUp hb qb be de no" data-wow-delay="0s"
+              style="visibility: visible; animation-delay: 0s;">
+              <div id="chart" style="min-height: 312.033px;">
+                <div id="apexchartsepj99hni" class="apexcharts-canvas apexchartsepj99hni apexcharts-theme-light"
+                  style="width: 400px; height: 312.033px;"><svg id="SvgjsSvg1058" width="400"
+                    height="312.03333333333336" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" class="apexcharts-svg"
+                    xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;">
+                    <g id="SvgjsG1060" class="apexcharts-inner apexcharts-graphical"
+                      transform="translate(46.333333333333314, 0)">
+                      <defs id="SvgjsDefs1059">
+                        <clipPath id="gridRectMaskepj99hni">
+                          <rect id="SvgjsRect1062" width="315.33333333333337" height="333.33333333333337" x="-3" y="-1"
+                            rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff">
+                          </rect>
+                        </clipPath>
+                        <clipPath id="forecastMaskepj99hni"></clipPath>
+                        <clipPath id="nonForecastMaskepj99hni"></clipPath>
+                        <clipPath id="gridRectMarkerMaskepj99hni">
+                          <rect id="SvgjsRect1063" width="313.33333333333337" height="335.33333333333337" x="-2" y="-2"
+                            rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff">
+                          </rect>
+                        </clipPath>
+                        <filter id="SvgjsFilter1072" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%"
+                          y="-50%">
+                          <feFlood id="SvgjsFeFlood1073" flood-color="#000000" flood-opacity="0.45"
+                            result="SvgjsFeFlood1073Out" in="SourceGraphic"></feFlood>
+                          <feComposite id="SvgjsFeComposite1074" in="SvgjsFeFlood1073Out" in2="SourceAlpha"
+                            operator="in" result="SvgjsFeComposite1074Out"></feComposite>
+                          <feOffset id="SvgjsFeOffset1075" dx="1" dy="1" result="SvgjsFeOffset1075Out"
+                            in="SvgjsFeComposite1074Out"></feOffset>
+                          <feGaussianBlur id="SvgjsFeGaussianBlur1076" stdDeviation="1 "
+                            result="SvgjsFeGaussianBlur1076Out" in="SvgjsFeOffset1075Out"></feGaussianBlur>
+                          <feBlend id="SvgjsFeBlend1077" in="SourceGraphic" in2="SvgjsFeGaussianBlur1076Out"
+                            mode="normal" result="SvgjsFeBlend1077Out"></feBlend>
+                        </filter>
+                        <filter id="SvgjsFilter1082" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%"
+                          y="-50%">
+                          <feFlood id="SvgjsFeFlood1083" flood-color="#000000" flood-opacity="0.45"
+                            result="SvgjsFeFlood1083Out" in="SourceGraphic"></feFlood>
+                          <feComposite id="SvgjsFeComposite1084" in="SvgjsFeFlood1083Out" in2="SourceAlpha"
+                            operator="in" result="SvgjsFeComposite1084Out"></feComposite>
+                          <feOffset id="SvgjsFeOffset1085" dx="1" dy="1" result="SvgjsFeOffset1085Out"
+                            in="SvgjsFeComposite1084Out"></feOffset>
+                          <feGaussianBlur id="SvgjsFeGaussianBlur1086" stdDeviation="1 "
+                            result="SvgjsFeGaussianBlur1086Out" in="SvgjsFeOffset1085Out"></feGaussianBlur>
+                          <feBlend id="SvgjsFeBlend1087" in="SourceGraphic" in2="SvgjsFeGaussianBlur1086Out"
+                            mode="normal" result="SvgjsFeBlend1087Out"></feBlend>
+                        </filter>
+                        <filter id="SvgjsFilter1092" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%"
+                          y="-50%">
+                          <feFlood id="SvgjsFeFlood1093" flood-color="#000000" flood-opacity="0.45"
+                            result="SvgjsFeFlood1093Out" in="SourceGraphic"></feFlood>
+                          <feComposite id="SvgjsFeComposite1094" in="SvgjsFeFlood1093Out" in2="SourceAlpha"
+                            operator="in" result="SvgjsFeComposite1094Out"></feComposite>
+                          <feOffset id="SvgjsFeOffset1095" dx="1" dy="1" result="SvgjsFeOffset1095Out"
+                            in="SvgjsFeComposite1094Out"></feOffset>
+                          <feGaussianBlur id="SvgjsFeGaussianBlur1096" stdDeviation="1 "
+                            result="SvgjsFeGaussianBlur1096Out" in="SvgjsFeOffset1095Out"></feGaussianBlur>
+                          <feBlend id="SvgjsFeBlend1097" in="SourceGraphic" in2="SvgjsFeGaussianBlur1096Out"
+                            mode="normal" result="SvgjsFeBlend1097Out"></feBlend>
+                        </filter>
+                        <filter id="SvgjsFilter1102" filterUnits="userSpaceOnUse" width="200%" height="200%" x="-50%"
+                          y="-50%">
+                          <feFlood id="SvgjsFeFlood1103" flood-color="#000000" flood-opacity="0.45"
+                            result="SvgjsFeFlood1103Out" in="SourceGraphic"></feFlood>
+                          <feComposite id="SvgjsFeComposite1104" in="SvgjsFeFlood1103Out" in2="SourceAlpha"
+                            operator="in" result="SvgjsFeComposite1104Out"></feComposite>
+                          <feOffset id="SvgjsFeOffset1105" dx="1" dy="1" result="SvgjsFeOffset1105Out"
+                            in="SvgjsFeComposite1104Out"></feOffset>
+                          <feGaussianBlur id="SvgjsFeGaussianBlur1106" stdDeviation="1 "
+                            result="SvgjsFeGaussianBlur1106Out" in="SvgjsFeOffset1105Out"></feGaussianBlur>
+                          <feBlend id="SvgjsFeBlend1107" in="SourceGraphic" in2="SvgjsFeGaussianBlur1106Out"
+                            mode="normal" result="SvgjsFeBlend1107Out"></feBlend>
+                        </filter>
+                      </defs>
+                      <g id="SvgjsG1064" class="apexcharts-pie">
+                        <g id="SvgjsG1065" transform="translate(0, 0) scale(1)">
+                          <circle id="SvgjsCircle1066" r="94.18130081300815" cx="154.66666666666669"
+                            cy="154.66666666666669" fill="transparent"></circle>
+                          <g id="SvgjsG1067" class="apexcharts-slices">
+                            <g id="SvgjsG1068" class="apexcharts-series apexcharts-pie-series" seriesName="series-1"
+                              rel="1" data:realIndex="0">
+                              <path id="SvgjsPath1069"
+                                d="M 154.66666666666669 9.772357723577215 A 144.89430894308947 144.89430894308947 0 0 1 245.27986750520506 267.73128800283075 L 213.5652472117166 228.15867053517331 A 94.18130081300815 94.18130081300815 0 0 0 154.66666666666669 60.485365853658536 L 154.66666666666669 9.772357723577215 z"
+                                fill="rgba(35,71,185,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt"
+                                stroke-width="0" stroke-dasharray="0"
+                                class="apexcharts-pie-area apexcharts-donut-slice-0" index="0" j="0"
+                                data:angle="141.29032258064515" data:startAngle="0" data:strokeWidth="0" data:value="73"
+                                data:pathOrig="M 154.66666666666669 9.772357723577215 A 144.89430894308947 144.89430894308947 0 0 1 245.27986750520506 267.73128800283075 L 213.5652472117166 228.15867053517331 A 94.18130081300815 94.18130081300815 0 0 0 154.66666666666669 60.485365853658536 L 154.66666666666669 9.772357723577215 z">
+                              </path>
+                            </g>
+                            <g id="SvgjsG1078" class="apexcharts-series apexcharts-pie-series" seriesName="series-2"
+                              rel="2" data:realIndex="1">
+                              <path id="SvgjsPath1079"
+                                d="M 245.27986750520506 267.73128800283075 A 144.89430894308947 144.89430894308947 0 0 1 20.568838508187326 209.54957153944466 L 67.5030783636551 190.34055483397236 A 94.18130081300815 94.18130081300815 0 0 0 213.5652472117166 228.15867053517331 L 245.27986750520506 267.73128800283075 z"
+                                fill="rgba(51,99,255,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt"
+                                stroke-width="0" stroke-dasharray="0"
+                                class="apexcharts-pie-area apexcharts-donut-slice-1" index="0" j="1"
+                                data:angle="106.45161290322582" data:startAngle="141.29032258064515"
+                                data:strokeWidth="0" data:value="55"
+                                data:pathOrig="M 245.27986750520506 267.73128800283075 A 144.89430894308947 144.89430894308947 0 0 1 20.568838508187326 209.54957153944466 L 67.5030783636551 190.34055483397236 A 94.18130081300815 94.18130081300815 0 0 0 213.5652472117166 228.15867053517331 L 245.27986750520506 267.73128800283075 z">
+                              </path>
+                            </g>
+                            <g id="SvgjsG1088" class="apexcharts-series apexcharts-pie-series" seriesName="series-3"
+                              rel="3" data:realIndex="2">
+                              <path id="SvgjsPath1089"
+                                d="M 20.568838508187326 209.54957153944466 A 144.89430894308947 144.89430894308947 0 0 1 64.05346582812838 41.60204533050256 L 95.76808612161679 81.17466279816001 A 94.18130081300815 94.18130081300815 0 0 0 67.5030783636551 190.34055483397236 L 20.568838508187326 209.54957153944466 z"
+                                fill="rgba(139,166,255,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt"
+                                stroke-width="0" stroke-dasharray="0"
+                                class="apexcharts-pie-area apexcharts-donut-slice-2" index="0" j="2"
+                                data:angle="73.5483870967742" data:startAngle="247.74193548387098" data:strokeWidth="0"
+                                data:value="38"
+                                data:pathOrig="M 20.568838508187326 209.54957153944466 A 144.89430894308947 144.89430894308947 0 0 1 64.05346582812838 41.60204533050256 L 95.76808612161679 81.17466279816001 A 94.18130081300815 94.18130081300815 0 0 0 67.5030783636551 190.34055483397236 L 20.568838508187326 209.54957153944466 z">
+                              </path>
+                            </g>
+                            <g id="SvgjsG1098" class="apexcharts-series apexcharts-pie-series" seriesName="series-4"
+                              rel="4" data:realIndex="3">
+                              <path id="SvgjsPath1099"
+                                d="M 64.05346582812838 41.60204533050256 A 144.89430894308947 144.89430894308947 0 0 1 154.64137783921046 9.772359930443741 L 154.65022892882013 60.485367288121765 A 94.18130081300815 94.18130081300815 0 0 0 95.76808612161679 81.17466279816001 L 64.05346582812838 41.60204533050256 z"
+                                fill="rgba(134,150,202,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt"
+                                stroke-width="0" stroke-dasharray="0"
+                                class="apexcharts-pie-area apexcharts-donut-slice-3" index="0" j="3"
+                                data:angle="38.70967741935482" data:startAngle="321.2903225806452" data:strokeWidth="0"
+                                data:value="20"
+                                data:pathOrig="M 64.05346582812838 41.60204533050256 A 144.89430894308947 144.89430894308947 0 0 1 154.64137783921046 9.772359930443741 L 154.65022892882013 60.485367288121765 A 94.18130081300815 94.18130081300815 0 0 0 95.76808612161679 81.17466279816001 L 64.05346582812838 41.60204533050256 z">
+                              </path>
+                            </g>
+                            <g id="SvgjsG1070" class="apexcharts-datalabels"><text id="SvgjsText1071"
+                                font-family="Helvetica, Arial, sans-serif" x="267.4486943268264" y="115.04973806378996"
+                                text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="600"
+                                fill="#ffffff" class="apexcharts-text apexcharts-pie-label"
+                                style="font-family: Helvetica, Arial, sans-serif;"
+                                filter="url(#SvgjsFilter1072)">39.2%</text></g>
+                            <g id="SvgjsG1080" class="apexcharts-datalabels"><text id="SvgjsText1081"
+                                font-family="Helvetica, Arial, sans-serif" x="124.70421317333495" y="270.3884804085987"
+                                text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="600"
+                                fill="#ffffff" class="apexcharts-text apexcharts-pie-label"
+                                style="font-family: Helvetica, Arial, sans-serif;"
+                                filter="url(#SvgjsFilter1082)">29.6%</text></g>
+                            <g id="SvgjsG1090" class="apexcharts-datalabels"><text id="SvgjsText1091"
+                                font-family="Helvetica, Arial, sans-serif" x="38.94485292473469" y="124.70421317333496"
+                                text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="600"
+                                fill="#ffffff" class="apexcharts-text apexcharts-pie-label"
+                                style="font-family: Helvetica, Arial, sans-serif;"
+                                filter="url(#SvgjsFilter1092)">20.4%</text></g>
+                            <g id="SvgjsG1100" class="apexcharts-datalabels"><text id="SvgjsText1101"
+                                font-family="Helvetica, Arial, sans-serif" x="115.04973806378993" y="41.88463900650696"
+                                text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="600"
+                                fill="#ffffff" class="apexcharts-text apexcharts-pie-label"
+                                style="font-family: Helvetica, Arial, sans-serif;"
+                                filter="url(#SvgjsFilter1102)">10.8%</text></g>
+                          </g>
+                        </g>
+                      </g>
+                      <line id="SvgjsLine1108" x1="0" y1="0" x2="309.33333333333337" y2="0" stroke="#b6b6b6"
+                        stroke-dasharray="0" stroke-width="1" stroke-linecap="butt" class="apexcharts-ycrosshairs">
+                      </line>
+                      <line id="SvgjsLine1109" x1="0" y1="0" x2="309.33333333333337" y2="0" stroke-dasharray="0"
+                        stroke-width="0" stroke-linecap="butt" class="apexcharts-ycrosshairs-hidden"></line>
+                    </g>
+                    <g id="SvgjsG1061" class="apexcharts-annotations"></g>
+                  </svg>
+                  <div class="apexcharts-legend"></div>
+                  <div class="apexcharts-tooltip apexcharts-theme-dark">
+                    <div class="apexcharts-tooltip-series-group" style="order: 1;"><span
+                        class="apexcharts-tooltip-marker" style="background-color: rgb(35, 71, 185);"></span>
+                      <div class="apexcharts-tooltip-text"
+                        style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">
+                        <div class="apexcharts-tooltip-y-group"><span
+                            class="apexcharts-tooltip-text-y-label"></span><span
+                            class="apexcharts-tooltip-text-y-value"></span></div>
+                        <div class="apexcharts-tooltip-goals-group"><span
+                            class="apexcharts-tooltip-text-goals-label"></span><span
+                            class="apexcharts-tooltip-text-goals-value"></span></div>
+                        <div class="apexcharts-tooltip-z-group"><span
+                            class="apexcharts-tooltip-text-z-label"></span><span
+                            class="apexcharts-tooltip-text-z-value"></span></div>
+                      </div>
+                    </div>
+                    <div class="apexcharts-tooltip-series-group" style="order: 2;"><span
+                        class="apexcharts-tooltip-marker" style="background-color: rgb(51, 99, 255);"></span>
+                      <div class="apexcharts-tooltip-text"
+                        style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">
+                        <div class="apexcharts-tooltip-y-group"><span
+                            class="apexcharts-tooltip-text-y-label"></span><span
+                            class="apexcharts-tooltip-text-y-value"></span></div>
+                        <div class="apexcharts-tooltip-goals-group"><span
+                            class="apexcharts-tooltip-text-goals-label"></span><span
+                            class="apexcharts-tooltip-text-goals-value"></span></div>
+                        <div class="apexcharts-tooltip-z-group"><span
+                            class="apexcharts-tooltip-text-z-label"></span><span
+                            class="apexcharts-tooltip-text-z-value"></span></div>
+                      </div>
+                    </div>
+                    <div class="apexcharts-tooltip-series-group" style="order: 3;"><span
+                        class="apexcharts-tooltip-marker" style="background-color: rgb(139, 166, 255);"></span>
+                      <div class="apexcharts-tooltip-text"
+                        style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">
+                        <div class="apexcharts-tooltip-y-group"><span
+                            class="apexcharts-tooltip-text-y-label"></span><span
+                            class="apexcharts-tooltip-text-y-value"></span></div>
+                        <div class="apexcharts-tooltip-goals-group"><span
+                            class="apexcharts-tooltip-text-goals-label"></span><span
+                            class="apexcharts-tooltip-text-goals-value"></span></div>
+                        <div class="apexcharts-tooltip-z-group"><span
+                            class="apexcharts-tooltip-text-z-label"></span><span
+                            class="apexcharts-tooltip-text-z-value"></span></div>
+                      </div>
+                    </div>
+                    <div class="apexcharts-tooltip-series-group" style="order: 4;"><span
+                        class="apexcharts-tooltip-marker" style="background-color: rgb(134, 150, 202);"></span>
+                      <div class="apexcharts-tooltip-text"
+                        style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;">
+                        <div class="apexcharts-tooltip-y-group"><span
+                            class="apexcharts-tooltip-text-y-label"></span><span
+                            class="apexcharts-tooltip-text-y-value"></span></div>
+                        <div class="apexcharts-tooltip-goals-group"><span
+                            class="apexcharts-tooltip-text-goals-label"></span><span
+                            class="apexcharts-tooltip-text-goals-value"></span></div>
+                        <div class="apexcharts-tooltip-z-group"><span
+                            class="apexcharts-tooltip-text-z-label"></span><span
+                            class="apexcharts-tooltip-text-z-value"></span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="jc ng yo/2">
+            <div class="wow fadeInUp ib" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+              <h2 class="va li pi ui yi vl bo">
+                Your crypto tokens at a glance
+              </h2>
+              <p class="gi qi xi ul">
+                Soon, you'll grasp how your leftover money from purchases gets invested using simple and clear charts. Say goodbye to confusing dashboards that leave you feeling lost!
+              </p>
+            </div>
+            <div class="wow fadeInUp ie" data-wow-delay="0s" style="visibility: visible; animation-delay: 0s;">
+              <p class="qb">
+                <span class="oa dc rc oe of"></span>
+                <span class="gi qi xi ul">
+                  73% Stable coins: USD Coin (USDC)
+                </span>
+              </p>
+              <p class="qb">
+                <span class="oa dc rc oe sf"></span>
+                <span class="gi qi xi ul">
+                  55% Ethers (ETH)
+                </span>
+              </p>
+              <p class="qb">
+                <span class="oa dc rc oe tf"></span>
+                <span class="gi qi xi ul">
+                  38% Bitcoins (BTC)
+                </span>
+              </p>
+              <p class="qb">
+                <span class="oa dc rc oe uf"></span>
+                <span class="gi qi xi ul">
+                  20.93% Solana coin (SOL)
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about-us" class="we bf th oh al" style="border: 0">
+    <div class="a">
+      <div class="wow fadeInUp la fb id fi" data-wow-delay="0s" style="margin-bottom: 0; visibility: visible; animation-delay: 0s;">
+        <h2 class="va li pi ui yi vl bo">
+          Meet the Team
+        </h2>
+        <p class="gi qi xi ul">
+          We are a fantastic team, comprising both experienced and young individuals, united in our mission to create a better world. Our challenge is to bring the widespread adoption of crypto tokens to everyone.        </p>
+      </div>
+      <ul style="display:flex; flex-wrap: wrap; justify-content: center; margin: 0; padding: 0; list-style: none;">
+        <li style="width:200px; height: 200px; margin: 8em 1em; ">
+          <div class="sk wow fadeInUp ra me ye _e nf jg fi qj ek gl" data-wow-delay="0s"
+            style="visibility: visible; animation-delay: 0s;">
+            <div class="ta ke ne">
+              <img src="avatar-atuli.png" alt="team" class="_q jc">
+            </div>
+            <div>
+              <h3 class="ya gi oi yi vl">
+                Avtandil
+              </h3>
+              <p class="va hi qi xi ul">
+                CLCO and Cofounder
+              </p>
+            </div>
+          </div>
+        </li>
+        <li  style="width:200px; height: 200px; margin: 8em 1em;">
+          <div class="sk wow fadeInUp ra me ye _e nf jg fi qj ek gl" data-wow-delay="0s"
+            style="visibility: visible; animation-delay: 0s;">
+            <div class="ta ke ne">
+              <img src="avatar-shota.png" alt="team" class="_q jc">
+            </div>
+            <div>
+              <h3 class="ya gi oi yi vl">
+                Shota
+              </h3>
+              <p class="va hi qi xi ul">
+                CEO and Cofounder
+              </p>
+            </div>
+          </div>
+        </li>
+        <li  style="width:200px; height: 200px; margin: 8em 1em;">
+          <div class="sk wow fadeInUp ra me ye _e nf jg fi qj ek gl" data-wow-delay="0s"
+            style="visibility: visible; animation-delay: 0s;">
+            <div class="ta ke ne">
+              <img src="avatar-anano.png" alt="team" class="_q jc">
+            </div>
+            <div>
+              <h3 class="ya gi oi yi vl">
+                Ana
+              </h3>
+              <p class="va hi qi xi ul">
+                Marketing and Design
+              </p>
+            </div>
+          </div>
+        </li>
+        <li  style="width:200px; height: 200px; margin: 8em 1em;">
+          <div class="sk wow fadeInUp ra me ye _e nf jg fi qj ek gl" data-wow-delay="0s"
+            style="visibility: visible; animation-delay: 0s;">
+            <div class="ta ke ne">
+              <img src="avatar-beka.png" alt="team" class="_q jc">
+            </div>
+            <div>
+              <h3 class="ya gi oi yi vl">
+                Beka
+              </h3>
+              <p class="va hi qi xi ul">
+                CSO and developer
+              </p>
+            </div>
+          </div>
+        </li>
+        <li  style="width:200px; height: 200px; margin: 8em 1em;">
+          <div class="sk wow fadeInUp ra me ye _e nf jg fi qj ek gl" data-wow-delay="0s"
+            style="visibility: visible; animation-delay: 0s;">
+            <div class="ta ke ne">
+              <img src="avatar-charly.png" alt="team" class="_q jc">
+            </div>
+            <div>
+              <h3 class="ya gi oi yi vl">
+                Charly
+              </h3>
+              <p class="va hi qi xi ul">
+                CTO and Cofounder
+              </p>
+            </div>
+          </div>
+        </li>  
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="nf gh ml">
+    <div class="a">
+      <div class="ha qb _d be">
+        <div class="jc ng ap/12" style="display: flex; flex-direction: column; width: 100%; align-items: center;">
+          <div class="wow fadeInUp fb nd" data-wow-delay="0s" 
+            style="visibility: visible; animation-delay: 0s; display: flex;">
+            <div class="kc zc ng">
+              <img src="hozon-logo.png" alt="logo" class="sb jc wk">
+            </div>
+            <h2 class="va li pi ui yi vl bo">
+              We will launch <span style="color: gold">HOZON</span> very soon. Stay tuned!
+            </h2>
+          </div>
+          <div class="qb be ge">
+            <a href="javascript:void(0)" class="qb ac pc be de oe nf xi fk lk gl vl bm" name="social-link"
+              aria-label="social-link">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M8.25 8.46875C7.6875 8.46875 7.28125 8.96875 7.28125 9.53125C7.28125 10.0938 7.71875 10.5938 8.25 10.5938C8.8125 10.5938 9.21875 10.125 9.21875 9.53125C9.25 8.9375 8.8125 8.46875 8.25 8.46875Z"
+                  fill="currentColor"></path>
+                <path
+                  d="M11.75 10.5625C12.285 10.5625 12.7187 10.0868 12.7187 9.5C12.7187 8.9132 12.285 8.4375 11.75 8.4375C11.215 8.4375 10.7812 8.9132 10.7812 9.5C10.7812 10.0868 11.215 10.5625 11.75 10.5625Z"
+                  fill="currentColor"></path>
+                <path
+                  d="M16.4687 0.3125H3.53125C2.4375 0.3125 1.53125 1.1875 1.53125 2.28125V15.375C1.53125 16.4688 2.40625 17.3438 3.5 17.3438H14.4687L13.9375 15.5938L15.1562 16.75L16.3437 17.8437L18.4062 19.6875V2.28125C18.5 1.1875 17.5625 0.3125 16.4687 0.3125ZM12.7187 12.9375C12.7187 12.9375 12.375 12.5313 12.0625 12.1563C13.3437 11.8125 13.8125 11 13.8125 11C13.4062 11.25 13.0312 11.4375 12.7187 11.5625C12.25 11.7812 11.75 11.9062 11.3125 11.9687C10.375 12.1562 9.5625 12.0937 8.8125 11.9687C8.25 11.875 7.8125 11.7188 7.40625 11.5625C7.1875 11.4687 6.90625 11.375 6.6875 11.25C6.65625 11.25 6.65625 11.2188 6.59375 11.2188C6.59375 11.2188 6.5625 11.2187 6.5625 11.1875C6.375 11.0937 6.3125 11 6.3125 11C6.3125 11 6.8125 11.7813 8.03125 12.1563C7.71875 12.5 7.375 12.9375 7.375 12.9375C5.21875 12.8438 4.4375 11.5 4.4375 11.5C4.4375 8.375 5.84375 5.875 5.84375 5.875C7.25 4.8125 8.5625 4.875 8.5625 4.875L8.65625 5C6.875 5.46875 6.09375 6.25 6.09375 6.25C6.09375 6.25 6.3125 6.125 6.65625 6C7.71875 5.5625 8.5 5.4375 8.84375 5.375C8.875 5.375 8.9375 5.375 9.03125 5.375C9.59375 5.28125 10.3125 5.28125 10.9687 5.375C11.9062 5.46875 12.875 5.78125 13.875 6.3125C13.875 6.3125 13.125 5.59375 11.4375 5.09375L11.5625 4.90625C11.5625 4.90625 12.875 4.875 14.2812 5.90625C14.2812 5.90625 15.6875 8.40625 15.6875 11.5313C15.7187 11.5 14.875 12.9063 12.7187 12.9375Z"
+                  fill="currentColor"></path>
+              </svg>
+            </a>
+            <a href="javascript:void(0)" class="qb ac pc be de oe nf xi fk lk gl vl bm" name="social-link"
+              aria-label="social-link">
+              <svg width="18" height="15" viewBox="0 0 18 15" class="cg">
+                <path
+                  d="M17.7165 2.00016C17.0749 2.29183 16.3832 2.4835 15.6665 2.57516C16.3999 2.1335 16.9665 1.4335 17.2332 0.591829C16.5415 1.0085 15.7749 1.30016 14.9665 1.46683C14.3082 0.750163 13.3832 0.333496 12.3332 0.333496C10.3749 0.333496 8.77487 1.9335 8.77487 3.9085C8.77487 4.19183 8.8082 4.46683 8.86654 4.72516C5.89987 4.57516 3.2582 3.15016 1.49987 0.991829C1.19154 1.51683 1.01654 2.1335 1.01654 2.7835C1.01654 4.02516 1.64154 5.12516 2.6082 5.75016C2.01654 5.75016 1.46654 5.5835 0.983203 5.3335C0.983203 5.3335 0.983203 5.3335 0.983203 5.3585C0.983203 7.09183 2.21654 8.54183 3.84987 8.86683C3.54987 8.95016 3.2332 8.99183 2.9082 8.99183C2.6832 8.99183 2.4582 8.96683 2.24154 8.92516C2.69154 10.3335 3.99987 11.3835 5.57487 11.4085C4.3582 12.3752 2.81654 12.9418 1.1332 12.9418C0.84987 12.9418 0.566536 12.9252 0.283203 12.8918C1.86654 13.9085 3.74987 14.5002 5.76654 14.5002C12.3332 14.5002 15.9415 9.05016 15.9415 4.32516C15.9415 4.16683 15.9415 4.01683 15.9332 3.8585C16.6332 3.3585 17.2332 2.72516 17.7165 2.00016Z">
+                </path>
+              </svg>
+            </a>
+            <a href="javascript:void(0)" class="qb ac pc be de oe nf xi fk lk gl vl bm" name="social-link"
+              aria-label="social-link">
+              <svg width="16" height="16" viewBox="0 0 16 16" class="cg">
+                <path
+                  d="M13.8333 0.5C14.2754 0.5 14.6993 0.675595 15.0118 0.988155C15.3244 1.30072 15.5 1.72464 15.5 2.16667V13.8333C15.5 14.2754 15.3244 14.6993 15.0118 15.0118C14.6993 15.3244 14.2754 15.5 13.8333 15.5H2.16667C1.72464 15.5 1.30072 15.3244 0.988155 15.0118C0.675595 14.6993 0.5 14.2754 0.5 13.8333V2.16667C0.5 1.72464 0.675595 1.30072 0.988155 0.988155C1.30072 0.675595 1.72464 0.5 2.16667 0.5H13.8333ZM13.4167 13.4167V9C13.4167 8.27949 13.1304 7.5885 12.621 7.07903C12.1115 6.56955 11.4205 6.28333 10.7 6.28333C9.99167 6.28333 9.16667 6.71667 8.76667 7.36667V6.44167H6.44167V13.4167H8.76667V9.30833C8.76667 8.66667 9.28333 8.14167 9.925 8.14167C10.2344 8.14167 10.5312 8.26458 10.75 8.48338C10.9688 8.70217 11.0917 8.99891 11.0917 9.30833V13.4167H13.4167ZM3.73333 5.13333C4.10464 5.13333 4.46073 4.98583 4.72328 4.72328C4.98583 4.46073 5.13333 4.10464 5.13333 3.73333C5.13333 2.95833 4.50833 2.325 3.73333 2.325C3.35982 2.325 3.0016 2.47338 2.73749 2.73749C2.47338 3.0016 2.325 3.35982 2.325 3.73333C2.325 4.50833 2.95833 5.13333 3.73333 5.13333ZM4.89167 13.4167V6.44167H2.58333V13.4167H4.89167Z">
+                </path>
+              </svg>
+            </a>
+            <a href="javascript:void(0)" class="qb ac pc be de oe nf xi fk lk gl vl bm" name="social-link"
+              aria-label="social-link">
+              <svg width="18" height="12" viewBox="0 0 18 12" class="cg">
+                <path
+                  d="M7.33366 8.49984L11.6587 5.99984L7.33366 3.49984V8.49984ZM16.967 1.97484C17.0753 2.3665 17.1503 2.8915 17.2003 3.55817C17.2587 4.22484 17.2837 4.79984 17.2837 5.29984L17.3337 5.99984C17.3337 7.82484 17.2003 9.1665 16.967 10.0248C16.7587 10.7748 16.2753 11.2582 15.5253 11.4665C15.1337 11.5748 14.417 11.6498 13.317 11.6998C12.2337 11.7582 11.242 11.7832 10.3253 11.7832L9.00033 11.8332C5.50866 11.8332 3.33366 11.6998 2.47533 11.4665C1.72533 11.2582 1.24199 10.7748 1.03366 10.0248C0.925326 9.63317 0.850326 9.10817 0.800326 8.44151C0.741992 7.77484 0.716992 7.19984 0.716992 6.69984L0.666992 5.99984C0.666992 4.17484 0.800326 2.83317 1.03366 1.97484C1.24199 1.22484 1.72533 0.741504 2.47533 0.533171C2.86699 0.424837 3.58366 0.349837 4.68366 0.299837C5.76699 0.241504 6.75866 0.216504 7.67533 0.216504L9.00033 0.166504C12.492 0.166504 14.667 0.299837 15.5253 0.533171C16.2753 0.741504 16.7587 1.22484 16.967 1.97484Z">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <!-- div class="jc ng bp/12">
+          <div class="sm:ud-14 wow fadeInUp pe kf fh wg gl" data-wow-delay="0s"
+            style="visibility: visible; animation-delay: 0s;">
+            <h3 class="xa mi pi aj vl hn tp sq">
+              Send us a Message
+            </h3>
+            <form data-dashlane-rid="b6a003dbdd8c591c" data-form-type="contact">
+              <div class="za">
+                <label for="name" class="ya ob hi qi aj vl">
+                  Full Name*
+                </label>
+                <input type="text" id="name" placeholder="Enter your full name"
+                  class="jc pe re ff if zg _g ii qi _i lj pk dl il tl" data-dashlane-rid="98e359e5b87246d7"
+                  data-kwimpalastatus="alive" data-kwimpalaid="1690393291435-0" data-form-type="name">
+                <span id="1690393291435-0" data-dashlanecreated="true"
+                  style="border-block: initial; border-inline: initial; border-start-start-radius: initial; border-start-end-radius: initial; border-end-start-radius: initial; border-end-end-radius: initial; overflow-inline: initial; overflow-block: initial; overscroll-behavior-inline: initial; overscroll-behavior-block: initial; margin-block: initial; margin-inline: initial; scroll-margin-block: initial; scroll-margin-inline: initial; padding-block: initial; padding-inline: initial; scroll-padding-block: initial; scroll-padding-inline: initial; inset-block: initial; inset-inline: initial; block-size: initial; min-block-size: initial; max-block-size: initial; inline-size: initial; min-inline-size: initial; max-inline-size: initial; contain-intrinsic-block-size: initial; contain-intrinsic-inline-size: initial; background-color: initial; background-image: url(&quot;moz-extension://2cb4688a-562b-4c0a-b02f-8749710e3271/content/injected/logo-autofill-known.svg&quot;); background-position: center center; background-repeat: no-repeat; background-attachment: initial; background-clip: initial; background-origin: initial; background-size: contain; background-blend-mode: initial; border: medium none; border-radius: initial; box-decoration-break: initial; -moz-float-edge: initial; display: inline; position: absolute; float: initial; clear: initial; vertical-align: initial; baseline-source: initial; overflow: initial; overflow-anchor: initial; transform: initial; rotate: initial; scale: initial; translate: initial; offset: initial; scroll-behavior: initial; scroll-snap-align: initial; scroll-snap-type: initial; scroll-snap-stop: initial; overscroll-behavior: initial; isolation: initial; break-after: initial; break-before: initial; break-inside: initial; resize: initial; perspective: initial; perspective-origin: initial; backface-visibility: initial; transform-box: initial; transform-style: initial; transform-origin: initial; contain: initial; container: initial; appearance: initial; -moz-orient: initial; will-change: initial; shape-image-threshold: initial; shape-margin: initial; shape-outside: initial; touch-action: initial; -webkit-line-clamp: initial; scrollbar-gutter: initial; columns: initial; column-fill: initial; column-rule: initial; column-span: initial; content: initial; counter-increment: initial; counter-reset: initial; counter-set: initial; opacity: 1; box-shadow: initial; clip: initial; filter: initial; backdrop-filter: initial; mix-blend-mode: initial; font: initial; font-synthesis: initial; font-palette: initial; visibility: visible; writing-mode: initial; text-orientation: initial; print-color-adjust: initial; image-rendering: initial; image-orientation: initial; dominant-baseline: initial; text-anchor: initial; color-interpolation: initial; color-interpolation-filters: initial; fill: initial; fill-opacity: initial; fill-rule: initial; shape-rendering: initial; stroke: initial; stroke-width: initial; stroke-linecap: initial; stroke-linejoin: initial; stroke-miterlimit: initial; stroke-opacity: initial; stroke-dasharray: initial; stroke-dashoffset: initial; clip-rule: initial; marker: initial; paint-order: initial; border-collapse: initial; empty-cells: initial; caption-side: initial; border-spacing: initial; color: initial; text-transform: initial; hyphens: initial; -moz-text-size-adjust: initial; text-indent: initial; overflow-wrap: initial; word-break: initial; text-justify: initial; text-align-last: initial; text-align: initial; letter-spacing: initial; word-spacing: initial; white-space: initial; text-shadow: initial; text-emphasis: initial; text-emphasis-position: initial; tab-size: initial; line-break: initial; -webkit-text-fill-color: initial; -webkit-text-stroke: initial; ruby-align: initial; ruby-position: initial; text-combine-upright: initial; text-rendering: initial; text-underline-offset: initial; text-underline-position: initial; text-decoration-skip-ink: initial; hyphenate-character: initial; forced-color-adjust: initial; -webkit-text-security: initial; cursor: pointer; pointer-events: initial; -moz-user-input: initial; -moz-user-modify: initial; -moz-user-focus: initial; caret-color: initial; accent-color: initial; color-scheme: initial; scrollbar-color: initial; list-style: initial; quotes: initial; margin: initial; overflow-clip-margin: initial; scroll-margin: initial; outline: initial; outline-offset: initial; page: initial; padding: initial; scroll-padding: initial; top: 11544.4px; right: initial; bottom: initial; left: 729.5px; z-index: auto; flex-flow: initial; place-content: initial; place-items: initial; flex: initial; place-self: initial; order: initial; width: 16px; min-width: 16px; max-width: initial; height: 16px; min-height: initial; max-height: initial; box-sizing: initial; object-fit: initial; object-position: initial; grid-area: initial; grid: initial; gap: initial; aspect-ratio: initial; contain-intrinsic-size: initial; vector-effect: initial; stop-color: initial; stop-opacity: initial; flood-color: initial; flood-opacity: initial; lighting-color: initial; mask-type: initial; clip-path: initial; mask: initial; x: initial; y: initial; cx: initial; cy: initial; rx: initial; ry: initial; r: initial; d: initial; table-layout: initial; text-overflow: initial; text-decoration: initial; ime-mode: initial; scrollbar-width: initial; user-select: initial; -moz-window-dragging: initial; -moz-force-broken-image-icon: initial; transition: initial; animation: initial; animation-composition: initial; -moz-box-align: initial; -moz-box-direction: initial; -moz-box-flex: initial; -moz-box-orient: initial; -moz-box-pack: initial; -moz-box-ordinal-group: initial;"></span>
+              </div>
+              <div class="za">
+                <label for="email" class="ya ob hi qi aj vl">
+                  Email Address*
+                </label>
+                <input type="email" id="email" placeholder="Enter your email address"
+                  class="jc pe re ff if zg _g ii qi _i lj pk dl il tl" data-dashlane-rid="2794a24e5dd3203a"
+                  data-kwimpalastatus="alive" data-kwimpalaid="1690393291435-1" data-form-type="email">
+                <span id="1690393291435-1" data-dashlanecreated="true"
+                  style="border-block: initial; border-inline: initial; border-start-start-radius: initial; border-start-end-radius: initial; border-end-start-radius: initial; border-end-end-radius: initial; overflow-inline: initial; overflow-block: initial; overscroll-behavior-inline: initial; overscroll-behavior-block: initial; margin-block: initial; margin-inline: initial; scroll-margin-block: initial; scroll-margin-inline: initial; padding-block: initial; padding-inline: initial; scroll-padding-block: initial; scroll-padding-inline: initial; inset-block: initial; inset-inline: initial; block-size: initial; min-block-size: initial; max-block-size: initial; inline-size: initial; min-inline-size: initial; max-inline-size: initial; contain-intrinsic-block-size: initial; contain-intrinsic-inline-size: initial; background-color: initial; background-image: url(&quot;moz-extension://2cb4688a-562b-4c0a-b02f-8749710e3271/content/injected/logo-autofill-known.svg&quot;); background-position: center center; background-repeat: no-repeat; background-attachment: initial; background-clip: initial; background-origin: initial; background-size: contain; background-blend-mode: initial; border: medium none; border-radius: initial; box-decoration-break: initial; -moz-float-edge: initial; display: inline; position: absolute; float: initial; clear: initial; vertical-align: initial; baseline-source: initial; overflow: initial; overflow-anchor: initial; transform: initial; rotate: initial; scale: initial; translate: initial; offset: initial; scroll-behavior: initial; scroll-snap-align: initial; scroll-snap-type: initial; scroll-snap-stop: initial; overscroll-behavior: initial; isolation: initial; break-after: initial; break-before: initial; break-inside: initial; resize: initial; perspective: initial; perspective-origin: initial; backface-visibility: initial; transform-box: initial; transform-style: initial; transform-origin: initial; contain: initial; container: initial; appearance: initial; -moz-orient: initial; will-change: initial; shape-image-threshold: initial; shape-margin: initial; shape-outside: initial; touch-action: initial; -webkit-line-clamp: initial; scrollbar-gutter: initial; columns: initial; column-fill: initial; column-rule: initial; column-span: initial; content: initial; counter-increment: initial; counter-reset: initial; counter-set: initial; opacity: 1; box-shadow: initial; clip: initial; filter: initial; backdrop-filter: initial; mix-blend-mode: initial; font: initial; font-synthesis: initial; font-palette: initial; visibility: visible; writing-mode: initial; text-orientation: initial; print-color-adjust: initial; image-rendering: initial; image-orientation: initial; dominant-baseline: initial; text-anchor: initial; color-interpolation: initial; color-interpolation-filters: initial; fill: initial; fill-opacity: initial; fill-rule: initial; shape-rendering: initial; stroke: initial; stroke-width: initial; stroke-linecap: initial; stroke-linejoin: initial; stroke-miterlimit: initial; stroke-opacity: initial; stroke-dasharray: initial; stroke-dashoffset: initial; clip-rule: initial; marker: initial; paint-order: initial; border-collapse: initial; empty-cells: initial; caption-side: initial; border-spacing: initial; color: initial; text-transform: initial; hyphens: initial; -moz-text-size-adjust: initial; text-indent: initial; overflow-wrap: initial; word-break: initial; text-justify: initial; text-align-last: initial; text-align: initial; letter-spacing: initial; word-spacing: initial; white-space: initial; text-shadow: initial; text-emphasis: initial; text-emphasis-position: initial; tab-size: initial; line-break: initial; -webkit-text-fill-color: initial; -webkit-text-stroke: initial; ruby-align: initial; ruby-position: initial; text-combine-upright: initial; text-rendering: initial; text-underline-offset: initial; text-underline-position: initial; text-decoration-skip-ink: initial; hyphenate-character: initial; forced-color-adjust: initial; -webkit-text-security: initial; cursor: pointer; pointer-events: initial; -moz-user-input: initial; -moz-user-modify: initial; -moz-user-focus: initial; caret-color: initial; accent-color: initial; color-scheme: initial; scrollbar-color: initial; list-style: initial; quotes: initial; margin: initial; overflow-clip-margin: initial; scroll-margin: initial; outline: initial; outline-offset: initial; page: initial; padding: initial; scroll-padding: initial; top: 11642.4px; right: initial; bottom: initial; left: 729.5px; z-index: auto; flex-flow: initial; place-content: initial; place-items: initial; flex: initial; place-self: initial; order: initial; width: 16px; min-width: 16px; max-width: initial; height: 16px; min-height: initial; max-height: initial; box-sizing: initial; object-fit: initial; object-position: initial; grid-area: initial; grid: initial; gap: initial; aspect-ratio: initial; contain-intrinsic-size: initial; vector-effect: initial; stop-color: initial; stop-opacity: initial; flood-color: initial; flood-opacity: initial; lighting-color: initial; mask-type: initial; clip-path: initial; mask: initial; x: initial; y: initial; cx: initial; cy: initial; rx: initial; ry: initial; r: initial; d: initial; table-layout: initial; text-overflow: initial; text-decoration: initial; ime-mode: initial; scrollbar-width: initial; user-select: initial; -moz-window-dragging: initial; -moz-force-broken-image-icon: initial; transition: initial; animation: initial; animation-composition: initial; -moz-box-align: initial; -moz-box-direction: initial; -moz-box-flex: initial; -moz-box-orient: initial; -moz-box-pack: initial; -moz-box-ordinal-group: initial;"></span>
+              </div>
+              <div class="za">
+                <label for="message" class="ya ob hi qi aj vl">
+                  Message*
+                </label>
+                <textarea rows="6" id="message" placeholder="Type your message"
+                  class="jc pe re ff if zg _g ii qi _i lj pk dl il tl" data-dashlane-rid="c5edf654d03a6398"
+                  data-form-type="other"></textarea>
+              </div>
+              <div>
+                <button class="jc oe of lg fi ii oi zi hk il yl dm" data-dashlane-rid="0041dc1f8d467cfc"
+                  data-dashlane-label="true" data-form-type="other">
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div -->
+      </div>
+    </div>
+  </section>
+
+  <script defer="" src="bundle.js"></script>
+</body>
+
+</html>
